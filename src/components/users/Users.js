@@ -1,27 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { fetchUsers } from "../actions/UsersAction";
+import { useDispatch, useSelector } from "react-redux";
 
 const Users = () => {
 
-    const [users , setUsers] = useState([])
+    const dispatch = useDispatch()
+    // const { data, error } = useSelector((state) => state.api);
+    const { data, error } = useSelector((state) =>{
+        console.log("state", state)
+        console.log("state api", state.api)
+        return state.api
+        });
 
-    const fetchUsers = async() => {
-        const url = "https://jsonplaceholder.typicode.com/users";
-        try {
-            const response = await fetch(url);
-            if (!response.ok){
-                throw new Error(`Response status : ${response.status}`);
-            }
-            const json = await response.json();
-            setUsers(json)
-            console.log("json" , json);
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
+    console.log("data", {data, error})
+
+    // const [users , setUsers] = useState([])
+
+    // const fetchUsers = async() => {
+    //     const url = "https://jsonplaceholder.typicode.com/users";
+    //     try {
+    //         const response = await fetch(url);
+    //         if (!response.ok){
+    //             throw new Error(`Response status : ${response.status}`);
+    //         }
+    //         const json = await response.json();
+    //         setUsers(json)
+    //         console.log("json" , json);
+    //     } catch (error) {
+    //         console.log(error.message);
+    //     }
+    // }
 
     useEffect(()=>{
-        fetchUsers();
-    },[])
+        dispatch(fetchUsers());
+    },[dispatch])
 
     return(
         <div className="flex items-center justify-center">
@@ -37,7 +49,7 @@ const Users = () => {
                 </thead>
                 <tbody className="sm:flex sm:flex-col">
                     {
-                        users.map((item)=>
+                        data && data.map((item)=>
                         <tr key={item.id} className="sm:flex sm:flex-col sm:border-b sm:border-yellow-400">
                             <td className="border border-slate-700 sm:border-0 px-3 py-2">{item.id}</td>
                             <td className="border border-slate-700 sm:border-0 px-3 py-2">{item.username}</td>
@@ -50,6 +62,9 @@ const Users = () => {
                 </tbody>
             </table>
         </div>
+        // <>
+        //     <p>users page</p>
+        // </>
     )
 }
 
