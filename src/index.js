@@ -5,15 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import ErrorBoundary from './ErrorBoundary';
+import { Provider } from 'react-redux';
+import store from './components/store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 <React.StrictMode>
-    <ErrorBoundary fallback="there is some error">
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </ErrorBoundary>
+    <Provider store={store}>
+        <ErrorBoundary fallback="there is some error">
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </ErrorBoundary>
+    </Provider>
 </React.StrictMode>
 );
 
