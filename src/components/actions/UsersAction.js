@@ -1,7 +1,6 @@
-import { FETCH_USERS, FETCH_DATA_FAILURE } from "../constants/constant";
+import { FETCH_USERS, FETCH_DATA_FAILURE, SELECT_USER } from "../constants/constant";
 
 export const fetchUsers = () => {
-    console.log("fetchUsers funciton action file")
     return async (dispatch)=>{
         const url = "https://jsonplaceholder.typicode.com/users";
         try {
@@ -11,7 +10,7 @@ export const fetchUsers = () => {
             }
             const json = await response.json();
             dispatch(fetchUserSuccess(json));
-            console.log("json pass" , json);
+            console.log("json pass action file" , json);
         } catch (error) {
             console.log(error.message);
             dispatch(fetchDataFailure(error.message))
@@ -21,17 +20,25 @@ export const fetchUsers = () => {
 }
 
 export const fetchUserSuccess = (users) => {
-    console.log("action user" , users);
+    // console.log("action fetchUserSuccess function" , users);
     return {
         type : FETCH_USERS,
-        payload : users
+        payload : users,
     }
 }
 
 export const fetchDataFailure = (error) => {
-    console.log("action user" , error);
+    // console.log("action fetchDataFailure error" , error);
     return{
         type : FETCH_DATA_FAILURE,
         payload : error
+    }
+}
+
+export const selectUser = (users) =>{
+    console.log("action selectUser function" , users);
+    return {
+        type: SELECT_USER,
+        payload : users
     }
 }
