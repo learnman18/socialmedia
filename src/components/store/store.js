@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import RootReducer from "../reducers/RootReducer";
 
-// Now, use the combined reducer in the store configuration.
+// Now, we are connecting the reducers uing configureStore
 console.log("inside store.js");
 const store = configureStore({
     reducer : RootReducer
