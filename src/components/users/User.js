@@ -43,12 +43,11 @@ const User = () => {
     }
 
     return (
-        <>
-            {/* {
-                selectedUser.id === parseInt(id) ? <p>user Details {selectedUser.id}</p> : <span>There is some error</span>
-            } */}
-            <p>user ID {selectedUser.id}</p>
-        </>
+        <div>
+            <h2 className="text-32">{selectedUser.name}</h2>
+            <p className="text-lg">Username - {selectedUser.username}</p>
+            <p className="text-lg">Email - {selectedUser.email}</p>
+        </div>
     );
 
  
