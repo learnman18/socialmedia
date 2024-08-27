@@ -1,3 +1,5 @@
 export const FETCH_USERS = "FETCH_USERS";
 export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
 export const SELECT_USER = "SELECT_USER";
+export const GET_USER_POST = "GET_USER_POST";
+export const GET_USER_POST_FAILURE = "GET_USER_POST_FAILURE";

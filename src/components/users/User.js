@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchUsers, selectUser } from "../actions/UsersAction";
+import CreateEditPost from "./CreatePost";
 
 
 const User = () => {
@@ -43,14 +44,15 @@ const User = () => {
     }
 
     return (
-        <div>
+        <>
             <h2 className="text-32">{selectedUser.name}</h2>
             <p className="text-lg">Username - {selectedUser.username}</p>
             <p className="text-lg">Email - {selectedUser.email}</p>
-        </div>
+            <div>
+                <CreateEditPost userId = {selectedUser.id}></CreateEditPost>
+            </div>
+        </>
     );
-
- 
 
 }
 
