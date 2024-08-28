@@ -18,6 +18,9 @@ module.exports = {
         "slate-800" : "#1e293b",
         "burlywood ": "#deb887",
         'burly': "#deb887",
+        'lightRed': '#be123c',
+        'limeLight' : '#84cc16',
+        'emeraledLight' : '#34d399',
       },
     },
     screens: {
@@ -28,6 +31,8 @@ module.exports = {
     },
     
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }
 
