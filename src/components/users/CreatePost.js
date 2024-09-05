@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UserPostsAction } from "../actions/UserPostsAction";
 
@@ -12,8 +12,11 @@ const CreateEditPost = (props) => {
     const [userPosts , setUserPosts] = useState([]);
     const [userPostShowHide , setuserPostShowHide] = useState(false);
     const [editPostId, setEditPostId] = useState(null);
-    const [postTitleUpdate, setPostTitleUpdate] = useState();
-    const [postContentUpdate, setPostContentUpdate ] = useState();
+    const [postTitleUpdate, setPostTitleUpdate] = useState("");
+    const [postContentUpdate, setPostContentUpdate ] = useState("");
+
+    const newPostId = useId();
+    console.log("newPostId", newPostId)
 
     const dispatch = useDispatch();
     const {postData, error} = useSelector((item)=>item.postReducer);
@@ -65,7 +68,45 @@ const CreateEditPost = (props) => {
     }
 
     const AddNewNote = () => {
+        console.log("postTitleUpdate", postTitleUpdate);
+        console.log("postContentUpdate", postContentUpdate);
+        if((postTitleUpdate === "") || (postContentUpdate === "")){
+            alert("none of the fields can be empty");
+        }
+
+        const newPost = {
+            id: userPosts.length + 1,
+            title : postTitleUpdate,
+            body : postContentUpdate
+        }     
+
+        // to add the new post on top
+        setUserPosts([newPost, ...userPosts]); 
+        //to add new post on botom
+        // setUserPosts([...userPosts, newPost]); 
+
+        setPostTitleUpdate('');
+        setPostContentUpdate('');
+        setuserPostShowHide(false);
+
         console.log("add new note");
+    }
+
+    const CancelNewNote = () =>{
+        console.log("cancel new note");
+        setuserPostShowHide(false)
+    }
+
+    const newPostTitle = (e) => {
+        let x = e;
+        console.log("title new note",x);
+        setPostTitleUpdate(x);
+    }
+
+    const newPostBody = (e) => {
+        let y = e;
+        console.log("body new note",y);
+        setPostContentUpdate(y);
     }
 
     const deletePost = (itemID) => {
@@ -75,7 +116,7 @@ const CreateEditPost = (props) => {
 
     const updatePost = (itemID) => {
         const updatedPost = userPosts.map((post)=>
-             post.id === itemID ? {...post, title: postTitleUpdate, body:postContentUpdate} : post
+            post.id === itemID ? {...post, title: postTitleUpdate, body:postContentUpdate} : post
         )
         setUserPosts(updatedPost);
         setEditPostId("");
@@ -113,13 +154,16 @@ const CreateEditPost = (props) => {
                     <div>
                         <div>
                             <span>Title</span>
-                            <input type="text" className="form-input text-black" />
+                            <input type="text" className="form-input text-black"
+                            onChange={(e)=>newPostTitle(e.target.value)}/>
                         </div>
                         <div>
                             <span>Content</span>
-                            <textarea name="" id="" className="form-textarea text-black"></textarea>
+                            <textarea name="" id="" className="form-textarea text-black"
+                            onChange={(e)=>newPostBody(e.target.value) }></textarea>
                         </div>
                         <button className="py-2 px-6 bg-limeLight rounded-sm" onClick={AddNewNote}>Add Note</button>
+                        <button className="py-2 px-6 bg-lightRed rounded-sm" onClick={CancelNewNote}>Cancel Note</button>
                     </div>
                 } 
             </div>
