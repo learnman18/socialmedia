@@ -110,7 +110,11 @@ const CreateEditPost = (props) => {
     }
 
     const deletePost = (itemID) => {
-        console.log("post delete");
+        let deletedPost = userPosts.filter((item)=>{
+            // return console.log("item" , item.id, "itemID" , itemID);
+            return item.id !== itemID ? item : ""
+        })
+        setUserPosts(deletedPost);
         console.log("itemID" , itemID);
     }
 
