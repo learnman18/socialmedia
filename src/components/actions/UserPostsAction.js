@@ -13,11 +13,11 @@ export const UserPostsAction = (id) => {
         axios
         .get(url)
         .then((response)=>{
-            console.log("response data", response.data);
+            // console.log("response data", response.data);
             dispatch(fetchUserPostSucess(response.data))
         })
         .catch((error)=>{
-            console.log("userPost error", error);
+            // console.log("userPost error", error);
             dispatch(fetchUserPostFailure(error));
         })
     }
