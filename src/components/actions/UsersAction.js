@@ -10,7 +10,7 @@ export const fetchUsers = () => {
             }
             const json = await response.json();
             dispatch(fetchUserSuccess(json));
-            console.log("json pass action file" , json);
+            // console.log("json pass action file" , json);
         } catch (error) {
             console.log(error.message);
             dispatch(fetchDataFailure(error.message))
@@ -35,8 +35,14 @@ export const fetchDataFailure = (error) => {
     }
 }
 
+/*
+    so this selectUser is getting called(dispatched) from  the user and users.js file, and user parameter has all the
+    API data, when I'm dispatching this function a parameter is passed over there, check the user or users.js file to
+    understand how it's working.
+    in redux a function need to be dispatched in order to get the value.
+*/
 export const selectUser = (users) =>{
-    console.log("action selectUser function" , users);
+    // console.log("action selectUser function" , users);
     return {
         type: SELECT_USER,
         payload : users

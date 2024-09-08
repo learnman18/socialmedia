@@ -26,7 +26,7 @@ const User = () => {
     */
 
     useEffect(()=>{
-       
+       //when no data is preesent, it will dispatch the fetchUsers()
         if(!data.length){
             dispatch(fetchUsers());
         }else{
@@ -48,9 +48,9 @@ const User = () => {
             <h2 className="text-32">{selectedUser.name}</h2>
             <p className="text-lg">Username - {selectedUser.username}</p>
             <p className="text-lg">Email - {selectedUser.email}</p>
-            <div>
+            <div className="flex">
                 <CreateEditPost userId = {selectedUser.id}></CreateEditPost>
-            </div>
+            </div>            
         </>
     );
 
