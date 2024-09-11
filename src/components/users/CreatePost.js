@@ -1,7 +1,8 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { UserPostsAction } from "../actions/UserPostsAction";
 import SingleUserAlbum from "./SingleUserAlbum";
+import { Link } from "react-router-dom";
 
 
 /* we are getting this props from the User.js file, we are passing the ID from their and we are accessing it here and
@@ -16,12 +17,11 @@ const CreateEditPost = (props) => {
     const [postTitleUpdate, setPostTitleUpdate] = useState("");
     const [postContentUpdate, setPostContentUpdate ] = useState("");
 
-    const newPostId = useId();
-    console.log("newPostId", newPostId)
 
     const dispatch = useDispatch();
     const {postData, error} = useSelector((item)=>item.postReducer);
-    console.log("postData" , postData , "error", error);
+    // console.log("postData" , postData , "error", error);
+    console.log("error", error)
 
     useEffect(()=>{
         dispatch(UserPostsAction(props.userId));
@@ -31,11 +31,11 @@ const CreateEditPost = (props) => {
         setUserPosts(postData);
     },[postData])
 
-    console.log("userPosts", userPosts)
+    // console.log("userPosts", userPosts)
     
     //Add new post button
     const showHidePost = () =>{
-        console.log("test");
+        // console.log("test");
         userPostShowHide === false ? setuserPostShowHide(true) : setuserPostShowHide(false); 
     }
     //Edit post button
@@ -184,9 +184,9 @@ const CreateEditPost = (props) => {
                                     ) : (
                                     <div>
                                         <div>
-                                            <p className="card_title font-semibold text-xl">
+                                            <Link to={`/posts/${item.id}`} className="card_title font-semibold text-xl">
                                                 {item.title}
-                                            </p>
+                                            </Link>
                                         </div>
                                         <div>
                                             <p className="card_content">{item.body}</p>
@@ -198,8 +198,8 @@ const CreateEditPost = (props) => {
                                             onClick={()=>deletePost(item.id)}>Delete</button>
                                         </div>
                                     </div>
-                                    )
-                                }  
+                                )
+                            }  
                             </div>
                         ))
                     }

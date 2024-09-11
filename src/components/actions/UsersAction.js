@@ -12,7 +12,7 @@ export const fetchUsers = () => {
             dispatch(fetchUserSuccess(json));
             // console.log("json pass action file" , json);
         } catch (error) {
-            console.log(error.message);
+            // console.log(error.message);
             dispatch(fetchDataFailure(error.message))
         }
     }

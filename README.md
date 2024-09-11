@@ -1,1 +1,1 @@
-Justy for learning purpose to understand redux.
+Just for learning purpose to understand redux.
