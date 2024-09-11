@@ -7,7 +7,7 @@ import axios from "axios";
 //this ID argument is coming from the CreatePost.js file.
 
 export const UserPostsAction = (id) => {
-    console.log("inside userPostAction function")
+    // console.log("inside userPostAction function")
     const url = `https://jsonplaceholder.typicode.com/posts?userId=${id}`;
     return (dispatch) =>{
         axios
@@ -25,7 +25,7 @@ export const UserPostsAction = (id) => {
 
 
 export const fetchUserPostSucess = (userPosts) => {
-    console.log("userPosts" , userPosts);
+    // console.log("userPosts" , userPosts);
     return {
         type : GET_USER_POST,
         payload : userPosts

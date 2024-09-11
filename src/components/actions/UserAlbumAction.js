@@ -7,11 +7,11 @@ export const UserAlbum = (userID) =>{
     axios
         .get(albumUrl)
         .then((response)=>{
-            console.log("response UserAlbum", response);
+            // console.log("response UserAlbum", response);
             dispatch(fetchUserAlbumSucess(response.data));
         })
         .catch((error)=>{
-            console.log("album API error", error);
+            // console.log("album API error", error);
             dispatch(fetchUserAlbumFailure(error));
         })
     }

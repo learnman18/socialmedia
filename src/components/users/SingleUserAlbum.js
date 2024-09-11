@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { UserAlbum } from "../actions/UserAlbumAction";
@@ -7,20 +7,32 @@ const SingleUserAlbum = (props)=> {
 
     const { id } = useParams();
     const dispatch = useDispatch();
-    const { albumData, error } = useSelector((item)=> item.albumReducer);
+    const { albumData } = useSelector((item)=> item.albumReducer);
+    const [albumInfo, setAlbumInfo] = useState();
 
     useEffect(()=>{
-        let x = props.UserPostDetails.find((userID) => userID.userId === parseInt(id));
-        console.log("album user ID", x);
+        props.UserPostDetails.find((userID) => userID.userId === parseInt(id));
         dispatch(UserAlbum(parseInt(id)));
     },[dispatch, id, props.UserPostDetails])
 
-    console.log("albumData", albumData);
-    console.log("error", error);
+    useEffect(()=>{
+        setAlbumInfo(albumData);
+    },[albumData]);
+
+    // console.log("album details", albumInfo);
+
+    // console.log("albumData", albumData);
+    // console.log("error", error);
 
     return(
         <>
-            <p>ALbum</p>
+            <h3 className="text-28">Album Id - { id }</h3>
+            {
+                albumInfo && 
+                albumInfo.map((item)=>(
+                    <p key={item.id} className="text-xl">{item.title}</p>
+                ))
+            }
         </>
     )
 }

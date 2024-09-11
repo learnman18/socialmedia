@@ -27,7 +27,7 @@ const Users = () => {
         Now we will go inside User.js file to check.
     */
     const individualUserPage = (item) => {
-        console.log("item" , item)
+        // console.log("item" , item)
         dispatch(selectUser(item));
     }
 
