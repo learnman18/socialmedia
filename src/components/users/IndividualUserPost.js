@@ -6,8 +6,10 @@ import { useParams } from "react-router-dom";
 const IndividualUserPost = ()=> {
 
     const dispatch = useDispatch();
-    const { postComment, error } = useSelector((item)=> item.userCommentPost );
-    const { postCommentId } = useParams();
+    const { postComment } = useSelector((item)=> item.userCommentPost );
+    // const { postComment, error } = useSelector((item)=> item.userCommentPost );
+    /* we can access error but we aer not using it so I just removed it, but we can access it and use it */
+    const { postCommentId } = useParams(); // check createPost.js 
     const [userPostComment, setUserPostComment] = useState();
 
     useEffect(()=>{
@@ -25,10 +27,10 @@ const IndividualUserPost = ()=> {
         <>
             { userPostComment && 
                 userPostComment.map((item)=>(
-                    <div key={item.id}>
-                        <p>{item.name}</p>
+                    <div className="pb-2 w-1/2 border border-white mb-2 last:mb-0" key={item.id}>
+                        <p className="text-28">{item.name}</p>
                         <p>{item.body}</p>
-                        <p>{item.email}</p>
+                        <p className="font-semibold">{item.email}</p>
                     </div>
                 ))
             }
